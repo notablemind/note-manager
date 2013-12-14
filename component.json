@@ -1,0 +1,14 @@
+{
+  "name": "note-manager",
+  "repo": "notablemind/note-manager",
+  "description": "Manage notes",
+  "version": "0.0.1",
+  "keywords": [],
+  "dependencies": {},
+  "development": {},
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": [
+    "index.js"
+  ]
+}
