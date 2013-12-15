@@ -4,11 +4,16 @@
   "description": "Manage notes",
   "version": "0.0.1",
   "keywords": [],
-  "dependencies": {},
+  "dependencies": {
+    "notablemind/manager": "*",
+    "lodash/lodash": "*"
+  },
   "development": {},
   "license": "MIT",
   "main": "index.js",
   "scripts": [
-    "index.js"
-  ]
+    "index.js",
+    "utils.js"
+  ],
+  "remotes": []
 }
