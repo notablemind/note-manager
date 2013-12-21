@@ -33,7 +33,8 @@ function toMap(data) {
     , children = []
     , cmap
   map[data.id] = {
-    children: children
+    children: children,
+    open: true
   }
   if (data.data) map[data.id].data = data.data
   if (!data.children) return map
@@ -50,7 +51,8 @@ function toMap(data) {
 function fromMap(root, map, hits) {
   var node = map[root]
     , tree = {
-        id: root
+        id: root,
+        open: true
       }
   hits = hits || {}
   if (hits[root]) throw new Error('Hit a node twice: ' + root)
