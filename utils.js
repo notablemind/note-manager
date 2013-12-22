@@ -4,7 +4,15 @@ module.exports = {
   fromMap: fromMap,
   areq: areq,
   cBind: cBind,
-  cEqual: cEqual
+  cEqual: cEqual,
+  dump: dump
+}
+
+function dump(manager, data) {
+  var map = toMap(data)
+  for (var id in map) {
+    manager.set(id, map[id])
+  }
 }
 
 function areq(a, b) {

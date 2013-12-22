@@ -1,10 +1,35 @@
 
 var _ = require('lodash')
-  , BaseManager = require('manager')
+  , Manager = require('manager')
 
   , utils = require('./utils')
 
-module.exports = Manager
+module.exports = function (base, data) {
+  var args = []
+  if (arguments.length < 2) {
+    data = base
+    base = Manager
+  } else if (arguments.length > 2) {
+    args = [].slice.call(arguments, 1, -1)
+    data = arguments[arguments.length - 1]
+  }
+  args.push({
+    genId: newId.bind(null, 16),
+    defaultNode: {
+      children: [],
+      data: {text: ''},
+      type: 'normal',
+      tags: []
+    },
+  })
+  var f = base.bind.apply(base, [null].concat(args))
+  var m = new f()
+  utils.dump(m, data)
+  m.dump = function (data) {
+    utils.dump(m, data)
+  }
+  return m
+}
 
 function newId(ln) {
   var chars = 'abcdef01245689'
@@ -15,25 +40,4 @@ function newId(ln) {
   }
   return id
 }
-
-function Manager(data) {
-  BaseManager.call(this)
-  if (data) this.dump(data)
-}
-
-Manager.prototype = _.extend(BaseManager.prototype, {
-  defaultNode: {
-    children: [],
-    data: {text: ''},
-    type: 'normal',
-    tags: []
-  },
-  genId: newId.bind(null, 16),
-  dump: function (data) {
-    var map = utils.toMap(data)
-    for (var id in map) {
-      this.got(id, map[id])
-    }
-  },
-})
 
